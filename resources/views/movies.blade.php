@@ -13,6 +13,7 @@
         <h3>Hora de lançamento: {{ $movie->image }}</h3>
         <img src="{{ $movie->image }}" alt="Imagem">
     @endforeach
+    <h4>Filmes Adapti</h4>
 </body>
 </html>
 
