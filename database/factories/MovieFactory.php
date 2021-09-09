@@ -26,7 +26,7 @@ class MovieFactory extends Factory
             'title' => $this->faker->name(),
             'genre' => $this->faker->name(),
             'release' => $this->faker->dateTimeThisYear(),
-            'country_id' => $this->faker->unique()->numberBetween(1,193),
+            'country_id' => $this->faker->unique()->numberBetween(1,120),
             'synopsis' => $this->faker->text(),
             'rating' => "9.8",
             'image' => ''

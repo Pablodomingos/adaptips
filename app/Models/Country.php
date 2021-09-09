@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Country extends Model
 {
     use HasFactory;
-    protected $fillable = ['country '];
+    protected $fillable = ['country'];
     public function movie(){
         return $this->hasOne(Movie::class);
     }

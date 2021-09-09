@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use PHPUnit\TextUI\XmlConfiguration\MoveWhitelistExcludesToCoverage;
 
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class Moviecontroller extends Controller
 {
@@ -21,16 +22,35 @@ class Moviecontroller extends Controller
         $search = request('search');
 
         if ($search) {
-            $movies = Movie::where([['title', 'like', '%'.$search.'%']])->get();
-        }else{
-            $movies = Movie::all();
-        }
-        
-        return view('movies', compact('movies','search'));
-        return view('movies',['movies'=>$movies, 'search'=>$search]);
+            //$countries = Country::where('country', 'like', '%'.$search.'%')->get();
 
-        foreach ($movies as $movies){
-            echo($movies);
+            //$country = $movie->country->country;
+            $movies = Movie::where('title', 'like', '%' . $search . '%')
+                ->orWhere('genre', 'like', '%' . $search . '%')
+                ->orWhere('release', 'like', '%' . $search . '%')
+                //->orWhere($country,'like', '%'.$search.'%')
+                ->orWhere('synopsis', 'like', '%' . $search . '%')
+                ->orWhere('rating', 'like', '%' . $search . '%')
+                ->get();
+
+            if (count($movies) == 0) {
+                $country = Country::where('country', $search)->first();
+                if ($country == null) {
+                    $movies = [];
+                } else {
+                    $movies = Movie::where('country_id', $country->id)->get();
+                }
+            }
+        } else {
+            $movies = Movie::all();
+            //dd($movies);
+        }
+
+        return view('movies', compact('movies', 'search'));
+        return view('movies', ['movies' => $movies, 'search' => $search]);
+
+        foreach ($movies as $movies) {
+            echo ($movies);
         }
     }
 
@@ -57,10 +77,10 @@ class Moviecontroller extends Controller
             ($request->file('image')->store('movie'));
         }*/
         $data = $request->all();
-        
-        $date['image'] = $request->file('image')->store('movies', 'public');
 
-        $movie = Movie::create($data);
+        $data['image'] = $request->file('image')->store('movie', 'public');
+
+        Movie::create($data);
 
         return redirect(route('movie.index'));
     }
@@ -100,7 +120,7 @@ class Moviecontroller extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $movie   = Movie::find($id);
+        $movie = Movie::find($id);
 
         if ($request->hasFile('image')) {
             Storage::delete('public/' . $movie->image);
@@ -121,12 +141,8 @@ class Moviecontroller extends Controller
     public function destroy($id)
     {
         $movie = Movie::findOrFail($id);
+        Storage::delete('public/' . $movie->image);
         $movie->delete();
         return redirect(route('movie.index'));
-    }
-
-    public function search(Request $request)
-    {
-        dd($request->all());
     }
 }

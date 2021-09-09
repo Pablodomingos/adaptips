@@ -1,0 +1,46 @@
+header{
+    background-color: rgb(253, 95, 22);
+    padding: 20px 0px;
+}
+
+body{
+    background-color: rgb(94, 185, 206);
+}
+
+main{
+    margin: 0px 10% 0px 20%;
+}
+
+footer{  
+    background: #302d2d;  
+    text-align: center;
+    padding: 20px 0px;
+    border-top: 1px solid #333;
+    bottom: 0;
+    left: 0;
+    height: 40px;
+    position: fixed;
+    width: 100%
+}
+
+.fim{
+    padding: 20px;
+    font-size: 20px;
+}
+
+.caixa{
+    padding: 40px;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    font-weight: bold
+}
+
+.botao{
+    position: relative;
+}
+.pesquisa{
+    padding-top: 5px;
+    position: relative;
+}
+
