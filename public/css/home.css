@@ -1,46 +1,133 @@
-header{
-    background-color: rgb(253, 95, 22);
-    padding: 20px 0px;
+:root{
+    --headerandfooter-cl: rgb(143, 157, 202);
+    --body-bg: rgba(80, 56, 151, 0.152);
+    --botao-pesquisa: rgb(21, 104, 187);
 }
 
-body{
-    background-color: rgb(94, 185, 206);
+.dark-mode:root{
+    --headerandfooter-cl: rgb(0, 0, 0);
+    --body-bg: rgb(0, 6, 46);
+    --dark-b: white;
+    --botao-pesquisa: rgb(121, 106, 106);
 }
 
-main{
-    margin: 0px 10% 0px 20%;
+.corpo{
+    background-color: var(--body-bg);
 }
-
-footer{  
-    background: #302d2d;  
-    text-align: center;
-    padding: 20px 0px;
-    border-top: 1px solid #333;
-    bottom: 0;
-    left: 0;
-    height: 40px;
+.cabeçalho{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: var(--headerandfooter-cl);
     position: fixed;
-    width: 100%
-}
-
-.fim{
-    padding: 20px;
-    font-size: 20px;
-}
-
-.caixa{
-    padding: 40px;
-    position: relative;
-    display: inline-block;
-    text-align: center;
-    font-weight: bold
-}
-
-.botao{
-    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 8px 0px;
 }
 .pesquisa{
-    padding-top: 5px;
+    margin: 50px 0px 0px 9px;
+    display: inline-block;
+    position: initial;
+}
+.botao-pesquisa{
+    font-size: 20px;
+    border: 0px;
+}
+.botao-pesquisa1{
+    appearance: none;
+    font-size: 20px;
+    border:0;
+    border-radius: 0% 10% 10% 0%;
+    background-color:var(--botao-pesquisa);
+}
+.criar{
     position: relative;
+    margin-right: 10px;
+}
+.botao-criar{
+    appearance: none;
+    border: 0;
+    border-radius: 5px;
+    background-color:var(--botao-pesquisa);
+    font-size: 16px;
+    font-weight: bold;
+}
+.botao-dark{
+    display: inline-block;
+    margin-right: 10px;
+}
+.dark{
+    position: absolute;
+    opacity: 0;
+}
+.gg-edit-contrast{
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    background-color: var(--dark-b);
+}
+.principal{
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 80px;
+}
+.counteudo{
+    width: 220px;
+    margin: 15px;
+    padding: 0px 10px;
+}
+.caixa-conteudo{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.caixa-da-caixa-conteudo{
+    display: flex;
+}
+.edite-delete{
+    height: 0;
+}
+.botao-editar{
+    background-color: transparent;
+    border: 0;
+    font-size: 22px;
+}
+.fas.fa-edit ,.fas.fa-trash-alt{
+    width: 10%;
+}
+.counteudo:hover .nomes:hover{
+    background: rgb(26, 26, 28);
+    color: white;
+    opacity: 10;
+}
+.titulo{
+    font-size: 18px;
+    text-align: left;
+}
+.imagem{
+    padding: 3px 0px;
+}
+.nomes{
+    font-family: Cambria;
+    padding: 3px 0px;
+    opacity: 1;
 }
 
+.rodape{   
+    background: var(--headerandfooter-cl);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+.adapti-logo{
+    width: 60px;
+    color: white;
+    display: inline-block;
+}
