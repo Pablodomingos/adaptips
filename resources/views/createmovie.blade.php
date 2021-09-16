@@ -1,28 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criar Filme | Adapti PS</title>
-    <link rel="stylesheet" href="css/home.css">
-</head>
-<body>
-    <form id="form-create" action="{{ route('movie.store') }}" method="POST" enctype="multipart/form-data">
+@extends('layouts.template')
+
+@section('title', 'Add Movies | Adapti Ps')
+    
+
+@section('content')
+
+    <form class="form-create" id="form-create" action="{{ route('movie.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <input type="text" name="title" placeholder="Titulo" required>
-        <input type="text" name="genre" placeholder="Genero" required>
-        <select name="country_id" id="country_id">
+        <label for="title">Título</label>
+        <input class="input-create" type="text" id="title" name="title" placeholder="Titulo" required>
+        <label for="genre">Genêro</label>
+        <input class="input-create" type="text" id="genre" name="genre" placeholder="Genero" required>
+        <label for="release">Lançamento</label>
+        <input class="input-create" type="date" id="release" name="release" placeholder="Lançamento" required>
+        <label for="rating">Nota</label>
+        <input class="input-create" type="number" id="rating" name="rating" placeholder="Nota" required>
+        <label for="Descrição">Descrição</label>
+        <textarea class="input-create" name="synopsis" id="Descrição" required></textarea>
+        <label for="country_id">País</label>
+        <select class="input-create" name="country_id" id="country_id" required>
+            <option value="" disabled selected>---> Escolha um país <---</option>
             @foreach($countries as $country)
                 <option value="{{ $country->id }}">{{ $country->country }}</option>
             @endforeach
         </select>
-        <input type="text" name="release" placeholder="Lançamento" required>
-        <input type="text" name="rating" placeholder="Nota" required>
-        <textarea name="synopsis" id="synopsis" cols="30" rows="10"></textarea>
-        <input type="file" name="image" accept="image/*" required>
-        <button type="submit">Salvar</button>
+        <label for="image">Imagem</label>
+        <input class="input-create" type="file" id="image" name="image" accept="image/*" required>
+        <button class="btn-salve" type="submit" form="form-create">Salvar</button>
+        <a class="btn-back" href="{{ route('movie.index') }}">Voltar</a>
     </form>
-    <a href="{{ route('movie.index') }}"><button>Voltar</button></a>
-</body>
-</html>
+    <script src="/js/index.js"></script>
+@endsection
