@@ -25,7 +25,8 @@
             @endforeach
         </select>
         <label for="image">Imagem</label>
-        <img src="/storage/{{ $movie->image }}" class="input-edit" type="file" id="image" style="width:100px; height:100px;" alt="Imagem da capa do filme {{ $movie->title }}">
+        <input class="input-create" type="file" id="image" name="image" accept="image/*">
+        <img src="/storage/{{ $movie->image }}" class="input-edit" type="file" id="image" style="width:150px; height:150px; object-fit: cover" alt="Imagem da capa do filme {{ $movie->title }}">
         <button class="btn-salve" type="submit" form="form-create">Salvar</button>
         <a class="btn-back" href="{{ route('movie.index') }}">Voltar</a>
     </form>

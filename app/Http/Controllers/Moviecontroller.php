@@ -78,7 +78,7 @@ class Moviecontroller extends Controller
         }*/
         $data = $request->all();
 
-        $data['image'] = '/storage/' . $request->file('image')->store('movie', 'public');
+        $data['image'] = $request->file('image')->store('movie', 'public');
 
         Movie::create($data);
 
@@ -119,12 +119,12 @@ class Moviecontroller extends Controller
      */
     public function update(Request $request, $id)
     {
-        $movie = Movie::find($id);
         $data = $request->all();
-
+        $movie = Movie::find($id);
+        
         if ($request->hasFile('image')) {
-            Storage::delete('public/' . substr($movie->image, 9));
-            $data['image'] = '/storage/' . $request->file('image')->store('movies', 'public');
+            Storage::delete('public/' . $movie->image);
+            $data['image'] = $request->file('image')->store('movies', 'public');
         }
 
         $movie->update($data);
