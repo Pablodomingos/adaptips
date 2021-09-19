@@ -2,7 +2,6 @@
 @section('title', 'Movies | Adapti Ps')
 
 @section('content')
-
     <div class="btn-logout" aria-labelledby="navbarDropdown">
         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
             @csrf
@@ -16,16 +15,16 @@
         </form>
     </div>
 
-    @if ($search)
-        <p>Buscando por {{ $search }}</p>
-        @if (count($movies) != 0 && $search)
-            <a href="{{ route('movie.index') }}"> Voltar</a>
-        @endif
-    @endif
     <h1 class="text-filmes">Filmes</h1>
-    <div class="corpo">
-        @foreach ($movies as $movie)
-            <div class="main-box">
+
+    <section class="section-content">
+        @if ($search)
+            <p class="p-content1" >Buscando por {{ $search }}</p>
+        @endif
+
+        <div class="div-body">
+            @foreach ($movies as $movie)
+            
                 <div class="box">
                     <div class="box-top">
                         <h3 class="title-movie">{{ $movie->title }}</h3>
@@ -34,16 +33,16 @@
                             <form class="form-destroy" action="{{ route('movie.destroy', $movie->id) }}" method="POST">
                                 @csrf
                                 @method('delete')
-                                <a class="btn-destroy" type="submit" href="{{ route('movie.destroy', $movie->id) }}"><button class="btn-destroy"><i class="fas fa-trash-alt"></i></button></a>
+                                <a class="btn-destroy" type="submit" href="{{ route('movie.destroy', $movie->id) }}"><button class="btn-destroy1"></button><i class="fas fa-trash-alt"></i></a>
                             </form>
                         </div>
                     </div>
-
+                    
                     <form class="img-movie" action="{{ route('movie.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <img class="img-movie" src="storage/{{ $movie->image }}" alt="{{ $movie->title }}"/>
                     </form>
-
+                    
                     <div class="info-content">
                         <p class="genre"><strong>Genero</strong>: {{ $movie->genre }}</p>
                         <p class="country"><strong>País</strong>: {{ $movie->country->country }}</p>
@@ -52,15 +51,22 @@
                         <p class="synosis"><strong>Descrição</strong>: {{ $movie->synopsis }}</p>
                     </div>
                 </div>
+                
+            @endforeach
+        </div>
+        
+        @if (count($movies) != 0 && $search)
+            <div class="div-searchS">
+                <div class="div-back">
+                    <a class="a-back" href="{{ route('movie.index') }}"> Voltar</a>
+                </div>
             </div>
-        @endforeach
-    </div>
+        @endif
+        
+        
+        @if (count($movies) == 0 && $search)
+            <p class="p-content2" >Não foi possível encontrar nem um filme com o nome: {{ $search }}! <a href="{{ route('movie.index') }}" class="div-back">Ver disponíveis</a></p>
+        @endif
+    </section>
 
-    @if (count($movies) == 0 && $search)
-        <p>Não foi possível encontrar nem um filme com o nome: {{ $search }}! <a href="{{ route('movie.index') }}">Ver disponíveis</a></p>
-    @elseif (count($movies)==0)
-        <p>Esse filme não está disponivel no momento</p>
-    @endif
-
-    <script src="/js/index.js"></script>
 @endsection
